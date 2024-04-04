@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CoolFool's To-Do App</title>
+<link rel="icon" type="image/x-icon" href="notes.png">
+<link rel="stylesheet" href="styles.css">
+
+
+</head>
+<body>
+<header>
+    <h1>CoolFool's To-Do App</h1>
+</header>
+
+<div id="notes-container">
+    <textarea id="note-input" placeholder="Write your task..."></textarea>
+    <button class="btn1" onclick="addTask()">Add Task</button>
+
+    <div id="notes"></div>
+</div>
+
+<footer>
+    <p>&copy; 2024 CoolFool's To-Do App</p>
+</footer>
+
+<script>
+function addTask() {
+    const noteInput = document.getElementById("note-input");
+    const taskText = noteInput.value.trim();
+    if (taskText !== "") {
+        const timestamp = new Date().toLocaleString();
+        const taskStatus = "Pending";
+        const taskDiv = createTaskElement(taskText, timestamp, taskStatus);
+        const notesContainer = document.getElementById("notes");
+        notesContainer.appendChild(taskDiv);
+        saveTask(taskText, timestamp, taskStatus);
+        noteInput.value = "";
+    } else {
+        alert("Please enter a task!");
+    }
+}
+
+
+function createTaskElement(text, timestamp, status) {
+    const taskDiv = document.createElement("div");
+    taskDiv.className = "note";
+    taskDiv.innerHTML = `
+        <p>${text}</p>
+        <small>${timestamp}</small>
+        <span class="task-status">${status}</span>
+        <div class="buttons">
+            <button class="edit-btn" onclick="editTask(this)">Edit</button>
+            <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+            <button class="tick-btn" onclick="toggleTaskStatus(this)">Tick</button>
+        </div>
+    `;
+    return taskDiv;
+}
+
+
+function saveTask(text, timestamp, status) {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.push({ text: text, timestamp: timestamp, status: status });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+
+function deleteTask(button) {
+    const taskDiv = button.parentElement.parentElement;
+    const notesContainer = document.getElementById("notes");
+    notesContainer.removeChild(taskDiv);
+    updateLocalStorage();
+}
+
+
+function editTask(button) {
+    const taskDiv = button.parentElement.parentElement;
+    const taskText = taskDiv.querySelector("p").textContent;
+    const editedText = prompt("Edit task:", taskText);
+    if (editedText !== null && editedText.trim() !== "") {
+        taskDiv.querySelector("p").textContent = editedText;
+        updateLocalStorage();
+    }
+}
+
+function toggleTaskStatus(button) {
+    const taskDiv = button.parentElement.parentElement;
+    const taskStatusSpan = taskDiv.querySelector(".task-status");
+    if (taskStatusSpan.textContent === "Pending") {
+        taskStatusSpan.textContent = "Completed";
+        taskDiv.classList.add("completed");
+    } else {
+        taskStatusSpan.textContent = "Pending";
+        taskDiv.classList.remove("completed");
+    }
+    updateLocalStorage();
+}
+
+function updateLocalStorage() {
+    const notesContainer = document.getElementById("notes");
+    const tasks = Array.from(notesContainer.children).map(taskDiv => {
+        const text = taskDiv.querySelector("p").textContent;
+        const timestamp = taskDiv.querySelector("small").textContent;
+        const status = taskDiv.querySelector(".task-status").textContent;
+        return { text: text, timestamp: timestamp, status: status };
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    const notesContainer = document.getElementById("notes");
+    tasks.forEach(task => {
+        const taskDiv = createTaskElement(task.text, task.timestamp, task.status);
+        notesContainer.appendChild(taskDiv);
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s;
+    background-color: #35374B;
+    background-image: linear-gradient(to right,#344955,#35374b);
+}
+header {
+    background-color: #50727B;
+    background-image: linear-gradient(to right,#78A083,#50727B,#50727B,#78A083);
+    color: #ffffff;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+header h1 {
+    margin: 0;
+    text-shadow: 2px 5px #0000007a;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#notes-container {
+    margin: 20px auto;
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+#note-input {
+    width: calc(100% - 20px);
+    height: 100px;
+    resize: none;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #78A083;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+#note-input:focus {
+    outline: none;
+    border-color: #1a73e8;
+}
+#notes {
+    display: grid;
+    grid-gap: 20px;
+}
+.note {
+    background-image: linear-gradient(to right,#50727b2d,white);
+    background-color: #50727b2d;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.384);
+    position: relative;
+    transition: transform 0.3s;
+}
+.note:hover {
+    transform: translateY(-6px);
+    background-image: linear-gradient(to right,#bfc3c454,#8f8b8b33);
+}
+.note p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+}
+.note small {
+    color: #5f5f5f;
+}
+.note .buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.note .buttons button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.note .buttons button:hover {
+    background-color: #70b1d1;
+}
+.delete-btn {
+    background-color: #ea4435c0;
+    color: #fff;
+}
+.edit-btn {
+    background-color: #34a853e3;
+    color: #ffffff;
+}
+.edit-form {
+    display: none;
+    margin-top: 10px;
+}
+.edit-form textarea {
+    width: calc(100% - 40px);
+    height: 60px;
+    resize: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #5b83c5;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+.edit-form textarea:focus {
+    outline: none;
+    border-color: #41536b;
+}
+.edit-form button {
+    background-color: #8fa4c5;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.edit-form button.cancel-btn {
+    background-color: #c0372a;
+    margin-left: 10px;
+}
+footer {
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-image: linear-gradient(to right,#78A083,#50727B,#50727B,#78A083);
+    color: #fff;
+    box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+}
+.btn1{
+    background-color:#50727B;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.btn1:hover{
+    background-color: #5b83c5;
+}
+
+.note .task-status {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+}
+.note.completed {
+    background-color: #a9e6c4; 
+}
+
+.note.pending {
+    background-color: #c43d3b;
+}
+.completed .note {
+    background-color: #4CAF50;
+    background-image: none;
+    color: white;
+}
+.tick-btn{
+    background-color: #e8eb50b4;
+    
+}
+.completed .tick-btn {
+
+    background-color: #ffffff;
+    
+    color: #4CAF50;
+}
+.completed .tick-btn:hover {
+    background-color: #4CAF50;
+    color: white;
+}
